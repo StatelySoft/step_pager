@@ -91,6 +91,10 @@ StepPagerItem(
 - `currentStep` (required): The currently active step index
 - `onStepChanged` (required): Callback function called when the step changes
 
+## Credits
+
+Design inspiration from [@nitishkmrk](https://x.com/nitishkmrk/status/1960619801598152902) on X/Twitter.
+
 ## License
 
 This project is licensed under the MIT License - see the LICENSE file for details.
