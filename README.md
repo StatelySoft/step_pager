@@ -1,39 +1,96 @@
-<!--
-This README describes the package. If you publish this package to pub.dev,
-this README's contents appear on the landing page for your package.
+# Step Pager
 
-For information about how to write a good package README, see the guide for
-[writing package pages](https://dart.dev/tools/pub/writing-package-pages).
+A beautiful, animated step pager widget for Flutter that provides smooth transitions between different steps or pages in your app.
 
-For general information about developing packages, see the Dart guide for
-[creating packages](https://dart.dev/guides/libraries/create-packages)
-and the Flutter guide for
-[developing packages and plugins](https://flutter.dev/to/develop-packages).
--->
-
-TODO: Put a short description of the package here that helps potential users
-know whether this package might be useful for them.
-
-## Features
-
-TODO: List what your package can do. Maybe include images, gifs, or videos.
-
-## Getting started
-
-TODO: List prerequisites and provide or point to information on how to
-start using the package.
-
-## Usage
-
-TODO: Include short and useful examples for package users. Add longer examples
-to `/example` folder.
+### Basic Example
 
 ```dart
-const like = 'sample';
+import 'package:flutter/material.dart';
+import 'package:step_pager/step_pager.dart';
+
+class MyPage extends StatefulWidget {
+  @override
+  _MyPageState createState() => _MyPageState();
+}
+
+class _MyPageState extends State<MyPage> {
+  int currentStep = 0;
+
+  void onStepChanged(int step) {
+    setState(() {
+      currentStep = step;
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: Column(
+        children: [
+          Expanded(
+            child: _getCurrentPage(),
+          ),
+          StepPager(
+            steps: [
+              StepPagerItem(
+                title: 'Explore',
+                icon: Icon(Icons.explore),
+              ),
+              StepPagerItem(
+                title: 'Curate',
+                icon: Icon(Icons.collections_bookmark),
+              ),
+              StepPagerItem(
+                title: 'Mix',
+                icon: Icon(Icons.shuffle),
+              ),
+              StepPagerItem(
+                title: 'Play',
+                icon: Icon(Icons.play_arrow),
+              ),
+            ],
+            currentStep: currentStep,
+            onStepChanged: onStepChanged,
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _getCurrentPage() {
+    switch (currentStep) {
+      case 0:
+        return ExplorePage();
+      case 1:
+        return CuratePage();
+      case 2:
+        return MixPage();
+      case 3:
+        return PlayPage();
+      default:
+        return ExplorePage();
+    }
+  }
+}
 ```
 
-## Additional information
+### StepPagerItem
 
-TODO: Tell users more about the package: where to find more information, how to
-contribute to the package, how to file issues, what response they can expect
-from the package authors, and more.
+Each step is defined using a `StepPagerItem`:
+
+```dart
+StepPagerItem(
+  title: 'Your Step Title',  // Required: The title displayed above the pager
+  icon: Icon(Icons.your_icon), // Required: The icon shown when this step is active
+)
+```
+
+### StepPager Properties
+
+- `steps` (required): List of `StepPagerItem` objects defining each step
+- `currentStep` (required): The currently active step index
+- `onStepChanged` (required): Callback function called when the step changes
+
+## License
+
+This project is licensed under the MIT License - see the LICENSE file for details.
