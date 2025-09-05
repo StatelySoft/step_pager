@@ -1,7 +1,7 @@
 name: step_pager
 description: "A new Flutter package project."
 version: 0.0.1
-homepage:
+homepage: https://github.com/StatelySoft/step_pager
 
 environment:
   sdk: ^3.8.1
